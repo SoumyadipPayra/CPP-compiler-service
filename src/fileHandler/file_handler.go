@@ -9,7 +9,9 @@ import (
 	"strings"
 )
 
-const ()
+const (
+	parentDir = "codes"
+)
 
 func Handle(ctx context.Context, userName, filePath string, fileContent []byte) ([]byte, error) {
 	savedFilePath, err := saveCPPFile(ctx, userName, filePath, fileContent)
@@ -32,7 +34,7 @@ func Handle(ctx context.Context, userName, filePath string, fileContent []byte) 
 
 func saveCPPFile(_ context.Context, userName, fileSavingPath string, fileContent []byte) (string, error) {
 	//prepend username to given filePath
-	savePath := fmt.Sprintf("%s/%s", userName, fileSavingPath)
+	savePath := fmt.Sprintf("%s/%s/%s", parentDir, userName, fileSavingPath)
 
 	//create the directories if needed
 	if err := os.MkdirAll(filepath.Dir(savePath), 0777); err != nil {
